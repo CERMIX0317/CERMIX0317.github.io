@@ -1,7 +1,609 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <h1>Welcome to my Personal Page</h1>
-    <p>Hosted on Github Pages!</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yejun Lee | Personal Website</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --ink: #17202a;
+      --muted: #5d6875;
+      --line: #d8dee7;
+      --accent: #087f8c;
+      --accent-dark: #05616b;
+      --warm: #b45309;
+      --focus: #f59e0b;
+      --shadow: 0 18px 45px rgba(23, 32, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent-dark);
+    }
+
+    a:hover {
+      color: var(--warm);
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      z-index: 100;
+      padding: 0.75rem 1rem;
+      color: #ffffff;
+      background: var(--ink);
+      border-radius: 6px;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(216, 222, 231, 0.9);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-wrap,
+    main,
+    footer {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--ink);
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 2.35rem;
+      height: 2.35rem;
+      place-items: center;
+      color: #ffffff;
+      background: var(--accent);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      letter-spacing: 0;
+    }
+
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.4rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    nav a {
+      display: inline-flex;
+      min-height: 2.4rem;
+      align-items: center;
+      padding: 0.45rem 0.75rem;
+      color: var(--muted);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--accent-dark);
+      background: #e6f4f5;
+    }
+
+    main {
+      padding: 2rem 0 3rem;
+    }
+
+    section {
+      scroll-margin-top: 6rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:last-child {
+      border-bottom: 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(240px, 0.7fr);
+      gap: 2.5rem;
+      align-items: center;
+      min-height: min(680px, calc(100vh - 82px));
+      padding-top: 2rem;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.65rem;
+      color: var(--accent-dark);
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.15;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2.4rem, 6vw, 5.2rem);
+    }
+
+    h2 {
+      margin: 0 0 1rem;
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+    }
+
+    h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1.15rem;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lead {
+      max-width: 690px;
+      margin-top: 1.25rem;
+      color: var(--muted);
+      font-size: 1.16rem;
+    }
+
+    .meta-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.6rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .meta-list li {
+      padding: 0.55rem 0.8rem;
+      color: var(--ink);
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(23, 32, 42, 0.04);
+    }
+
+    .profile-frame {
+      justify-self: center;
+      width: min(320px, 100%);
+      aspect-ratio: 1;
+      padding: 0.7rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .section-intro {
+      max-width: 720px;
+      margin-bottom: 1.4rem;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      min-height: 100%;
+      padding: 1.2rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(23, 32, 42, 0.05);
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      padding: 0.25rem 0.55rem;
+      color: var(--accent-dark);
+      background: #e6f4f5;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .contact-list,
+    .course-list {
+      display: grid;
+      gap: 0.8rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-list li,
+    .course-list li {
+      padding: 0.9rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .course-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.35rem;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 2.8rem;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1rem;
+      color: #ffffff;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      color: #ffffff;
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    .button.secondary {
+      color: var(--accent-dark);
+      background: #ffffff;
+      border-color: var(--line);
+    }
+
+    .button.secondary:hover {
+      color: var(--warm);
+      background: #fff7ed;
+      border-color: #fed7aa;
+    }
+
+    details {
+      padding: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    pre {
+      overflow-x: auto;
+      margin: 1rem 0 0;
+      padding: 1rem;
+      color: #1f2937;
+      background: #f3f4f6;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    footer {
+      padding: 1.8rem 0 2.4rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 820px) {
+      .nav-wrap {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav ul {
+        justify-content: flex-start;
+      }
+
+      .hero,
+      .grid,
+      .course-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        gap: 1.8rem;
+      }
+
+      .profile-frame {
+        justify-self: start;
+        width: min(260px, 100%);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav-wrap,
+      main,
+      footer {
+        width: min(100% - 24px, 1120px);
+      }
+
+      nav a {
+        padding-inline: 0.55rem;
+        font-size: 0.9rem;
+      }
+
+      section {
+        padding: 2.35rem 0;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header>
+    <div class="nav-wrap">
+      <a class="brand" href="#intro" aria-label="Yejun Lee home">
+        <span class="brand-mark" aria-hidden="true">YL</span>
+        <span>Yejun Lee</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul>
+          <li><a href="#intro">Intro</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#resume">CV</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#ai-usage">AI Usage</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="intro" class="hero" aria-labelledby="intro-title">
+      <div>
+        <p class="eyebrow">Personal Website</p>
+        <h1 id="intro-title">Hi, I am Yejun Lee.</h1>
+        <p class="lead">
+          I am a Seoul National University Computer Science and Engineering student
+          interested in reinforcement learning, graphics programming, and practical
+          software development. I work with C, C++, Python, and Java, and I enjoy
+          connecting research ideas with readable implementations.
+        </p>
+        <ul class="meta-list" aria-label="Profile highlights">
+          <li>Major: Computer Science and Engineering</li>
+          <li>University: Seoul National University</li>
+          <li>Interests: RL and OpenGL Graphics</li>
+        </ul>
+      </div>
+      <figure class="profile-frame">
+        <img src="assets/profile.png" alt="Profile photo of Yejun Lee">
+      </figure>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p class="section-intro">
+        The best places to find my work and reach me are GitHub and email.
+      </p>
+      <ul class="contact-list">
+        <li><strong>Email:</strong> <a href="mailto:cermix0317@gmail.com">cermix0317@gmail.com</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/CERMIX0317">github.com/CERMIX0317</a></li>
+        <li><strong>Website:</strong> <a href="https://CERMIX0317.github.io">CERMIX0317.github.io</a></li>
+      </ul>
+    </section>
+
+    <section id="resume" aria-labelledby="resume-title">
+      <h2 id="resume-title">CV / Resume</h2>
+      <p class="section-intro">
+        My CV highlights my SNU CSE background, programming skills, AI research
+        interest, graphics experience, and student activities.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>Education</h3>
+          <p>
+            Seoul National University, Department of Computer Science and Engineering.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Skills and Interests</h3>
+          <p>
+            Programming with C, C++, Python, and Java; reinforcement learning;
+            OpenGL-based graphics tool manipulation.
+          </p>
+        </article>
+      </div>
+      <div class="button-row">
+        <a class="button" href="assets/cv.pdf">View CV</a>
+        <a class="button secondary" href="assets/cv.pdf" download>Download CV</a>
+      </div>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Activities and Projects</h2>
+      <p class="section-intro">
+        Selected experience from AI, research, programming, leadership, and volunteering.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>SNU AI Hackathon</h3>
+          <p>
+            Participated in the 1st Seoul National University AI Hackathon with Team ATP
+            and received the Excellence Award on August 21, 2025.
+          </p>
+          <div class="tag-row" aria-label="Project topics">
+            <span class="tag">AI</span>
+            <span class="tag">Hackathon</span>
+            <span class="tag">Award</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>MLSYS Lab Internship</h3>
+          <p>
+            Completed an undergraduate research internship at MLSYS Lab in 2025,
+            building research experience around machine learning systems.
+          </p>
+          <div class="tag-row" aria-label="Project topics">
+            <span class="tag">Research</span>
+            <span class="tag">ML Systems</span>
+            <span class="tag">Internship</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Student Activities</h3>
+          <p>
+            Served as an executive of Seoul National University's central mystery club,
+            Churrus, and gained educational volunteering experience at a children's center.
+          </p>
+          <div class="tag-row" aria-label="Activity topics">
+            <span class="tag">Leadership</span>
+            <span class="tag">Club</span>
+            <span class="tag">Volunteering</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="courses" aria-labelledby="courses-title">
+      <h2 id="courses-title">Planned Courses</h2>
+      <p class="section-intro">
+        Courses I plan to take to support my interests in AI, graphics, and systems.
+      </p>
+      <ul class="course-list">
+        <li>Algorithms</li>
+        <li>Machine Learning</li>
+        <li>Reinforcement Learning</li>
+        <li>Computer Graphics</li>
+        <li>Computer Systems</li>
+        <li>Database Systems</li>
+      </ul>
+    </section>
+
+    <section id="ai-usage" aria-labelledby="ai-usage-title">
+      <h2 id="ai-usage-title">AI Usage</h2>
+      <p class="section-intro">
+        Tool name: <strong>Codex</strong>
+      </p>
+      <details>
+        <summary>Prompt used</summary>
+        <pre>Build a static personal website for this GitHub Pages repository.
+
+Edit index.html in the repo root.
+Use assets/profile.jpg or assets/profile.png as the profile image.
+Link assets/cv.pdf from the CV or Resume section.
+
+Keep the site simple and compatible with GitHub Pages.
+Do not use a backend or paid external API.
+Make the page responsive and accessible.
+
+The website must include:
+1. Personal introduction: name, major, short self-introduction
+2. Profile photo or avatar
+3. Contact information
+4. CV / Resume section
+5. At least two activities or projects
+6. Navigation menu linking to each section
+7. A section listing courses I plan to take
+8. AI Usage section with the tool name Codex and this prompt
+
+Use a clean, modern design.
+After editing, explain what files you changed and how I can preview the site locally.</pre>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Yejun Lee. Built for GitHub Pages.</p>
+  </footer>
+</body>
 </html>
